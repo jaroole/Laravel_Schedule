@@ -9,10 +9,18 @@
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
+@stack('css')
+<style>
+.container {max-width:720px;}
+.required:after{content:'*';color:red;}
+
+</style> 
+
+
 </head>
 <body>
 
-  <div class="d-flex flex-column justify-content-between min-vh-100 text-center">
+  <div class="d-flex flex-column justify-content-between min-vh-100">
 
     @include('includes.header')
 
@@ -28,7 +36,7 @@
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.min.js"></script>
-
+  @stack('js')
 
 </body>
 

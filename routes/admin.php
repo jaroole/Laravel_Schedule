@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->middleware( 'admin')->group(function(){
 
-    Route::redirect('/','/admin/posts')->name('user');
+    Route::redirect('/','/admin/posts')->name('admin');
 
     Route::get('posts', [PostController::class, 'index'])->name('admin.posts');
 

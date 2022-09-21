@@ -11,9 +11,16 @@ class PostController extends Controller
         return 'Страница списка постов';
     }
     public function create(){
+
         return 'Страница создания постов';
     }
-    public function store(){
+    public function store(Request $request){
+
+        $title=$request->input('title');
+        $content=$request->input('content');
+      
+
+        dd($title, $content);
         return 'Страница сохранения постов';
     }
     public function show($post){

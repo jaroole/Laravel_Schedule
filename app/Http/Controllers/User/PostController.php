@@ -30,6 +30,7 @@ class PostController extends Controller
       
 
         //dd($title, $content);
+        alert(__('Сохранено'));
         return redirect()->route('user.posts.show', 123);
     }
     public function show($post){
@@ -64,6 +65,7 @@ class PostController extends Controller
         // return 'Страница обновления постов';
 
         // return redirect()->route('user.posts.show', $post);
+        alert(__('Сохранено'));
         return redirect()->back();
     }
     public function delete($post){

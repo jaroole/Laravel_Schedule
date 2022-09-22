@@ -22,6 +22,8 @@
 
   <div class="d-flex flex-column justify-content-between min-vh-100">
 
+    
+    @include('includes.alert')
     @include('includes.header')
 
     <main class="flex-grow-1 py-3">
@@ -31,9 +33,6 @@
     @include('includes.footer')
 
   </div>
-
-
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/js/bootstrap.min.js"></script>
   @stack('js')

@@ -4,75 +4,113 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
     public function index(){
 
-      
-            $post=(object)[
-                'id'=>'123',
-                'title'=>'Lorem ipsum dolor sit amet.',
-                'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
-            ];
-            $posts=array_fill(0,10, $post);
-           
-        
+        $posts=DB::select('select * from posts where user_id = ?', [1003]);
         return view('user.posts.index', compact('posts'));
     }
+
+
     public function create(){
         return view('user.posts.create');
     }
-    public function store(Request $request){
 
+
+    public function store(Request $request){
+        
         $title=$request->input('title');
         $content=$request->input('content');
-      
+        DB::insert('insert into posts (title, content, user_id) values (?, ?, ?)', [$title, $content, 1003]);
 
-        //dd($title, $content);
+       
         alert(__('Сохранено'));
-        return redirect()->route('user.posts.show', 123);
+       return redirect()->route('user.posts', 1003);
     }
-    public function show($post){
 
-        $post=(object)[
-            'id'=>'123',
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
-        ];
+
+
+
+    public function show($post){
+        
+
+        $post=DB::select('select * from posts where id = ? AND user_id = ?', [$post, 1003]);
+        $post = json_decode(json_encode($post), true);
+        $post=$post['0'];
+
+        //$post=['id'=>1012, 'title'=>'тест', 'content'=>'нет'];
+
+       //dd($post);
+       //dd($post2);
+
             
         return view('user.posts.show', compact('post'));
     }
+
+
+
+
     public function edit($post){
-        $post=(object)[
-            'id'=>'123',
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
-        ];
+
+
+        $post=DB::select('select * from posts where id = ?', [$post]);
+        $post = json_decode(json_encode($post), true);
+        $post=$post['0'];
+        //dd($post);
+
+        // $post=(object)[
+        //     'id'=>$post,
+        //     'title'=>'Lorem ipsum dolor sit amet.',
+        //     'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
+        // ];
        
         return view('user.posts.edit', compact('post'));
 
      
        
     }
+
+
+
     public function update(Request $request, $post){
 
         $title=$request->input('title');
         $content=$request->input('content');
-      
+
+
+
+   
+        DB::update(
+            'update posts set title = ? , content = ? where user_id = ? AND id = ?',
+            [$title, $content, 1003, $post]);
+        
+        
 
         // dd($title, $content);
         // return 'Страница обновления постов';
 
         // return redirect()->route('user.posts.show', $post);
         alert(__('Сохранено'));
-        return redirect()->back();
+        return redirect()->route('user.posts');
     }
+
+
+
     public function delete($post){
         // return 'Страница удаления постов';
+       
+        DB::delete('delete from posts where id = ?', [$post]);
+       
+        
+        alert(__('Удалено'));
         return redirect()->route('user.posts');
-
     }
+
+
+
     public function like(){
         return ' лайка+1';
     }

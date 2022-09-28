@@ -15,26 +15,42 @@
         <x-title>
             {{__('Просмотр поста')}}
             <x-slot name="right">
-                    <x-button-link href="{{route('user.posts.edit', $post->id)}}">
+                    <x-button-link href="{{route('user.posts.edit', $post['id'])}}">
                         {{__('Изменить')}}
                     </x-button-link>
+
+                    
+                    <x-post.delete action="{{route('user.posts.delete', $post['id'])}}" method="delete">
+
+                        <x-button type="submit" size="sm">
+                            {{__('Удалить пост')}}
+                        </x-button>
+                    </x-post.delete>         
+                    
+
+                    
+
+               
+                    
+
+
             </x-slot>
         </x-title>
 
             <h2 class="h4">
                
-                    {{$post->title}}
+                    {{$post['title']}}
 
                
 
 
             </h2>
             <div class="small text-muted">
-                {{now()->format('d.m.y h:i:s')}}
+                {{$post['created_at']}}
             </div>
 
             <div class="pt-3">
-                {!!$post->content!!}
+                {!!$post['content']!!}
         
         
                </div>

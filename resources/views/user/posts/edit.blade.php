@@ -13,8 +13,8 @@
 
  
         
-        <x-post.form action="{{route('user.posts.update', $post->id)}}" method="put" :post="$post">
-            <x-button type="submit">
+        <x-post.form action="{{route('user.posts.update', $post['id'])}}" method="put" :post="$post">
+            <x-button type="submit" >
                 {{__('Сохранить')}}
             </x-button>
 

@@ -23,11 +23,9 @@
                     {{$post->title}}
 
                 </a>
-
-
             </h2>
             <div class="small-text-muted">
-                {{now()->format('d.m.y h:i:s')}}
+                {{$post->created_at}}
             </div>
 
         </div>

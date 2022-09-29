@@ -22,7 +22,7 @@
                     
                     <x-post.delete action="{{route('user.posts.delete', $post['id'])}}" method="delete">
 
-                        <x-button type="submit" size="sm">
+                        <x-button type="submit" size="sm" class="mb-3">
                             {{__('Удалить пост')}}
                         </x-button>
                     </x-post.delete>         

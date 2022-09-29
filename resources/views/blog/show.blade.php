@@ -1,9 +1,10 @@
 @extends('layouts.main')
-@section('page.title', $post->title)
+{{-- @dd($post['0']); --}}
+@section('page.title', $post['title'])
 @section('main.content')
         
         <x-title>
-            {{$post->title}}
+            {{$post['title']}}
 
 
             <x-slot name="link">
@@ -19,7 +20,7 @@
         
         
         
-        {!!$post->content!!}
+        {!!$post['content']!!}
    
 
 @endsection

@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-md bg-light">
     <div class="container">
-        <a href="{{route('home')}}" class="navbar-brand" >
+        {{-- <a href="{{route('home')}}" class="navbar-brand" >
             {{config('app.name')}}
-        </a>
+        </a> --}}
 
 
         <button type="button" class="navbar-toggler"  data-bs-toggle="collapse" data-bs-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">

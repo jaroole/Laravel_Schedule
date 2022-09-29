@@ -1,11 +1,12 @@
 @props(['post'=>null])
 
 <x-form {{$attributes}} > 
+    <a>
 
 
     {{$slot}}
 
-
+    </a>
 </x-form>
 
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogController extends Controller
 {
@@ -15,13 +16,17 @@ class BlogController extends Controller
         $category_id= $request->input('category_id');
 
         //dd($search, $category_id);
-        $post=(object)[
-            'id'=>'123',
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
-            'category_id'=> 1,
-        ];
-        $posts = array_fill(0,10, $post);
+
+        $posts=DB::select('select * from posts');
+        // return view('user.posts.index', compact('posts'));
+
+        // $post=(object)[
+        //     'id'=>'123',
+        //     'title'=>'Lorem ipsum dolor sit amet.',
+        //     'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
+        //     'category_id'=> 1,
+        // ];
+        // $posts = array_fill(0,10, $post);
 
         $posts = array_filter($posts, function($post) use ($search, $category_id) {
 
@@ -51,12 +56,18 @@ class BlogController extends Controller
     public function show($post)
     {
         
-        $post=(object)[
-            'id'=>'123',
-            'title'=>'Lorem ipsum dolor sit amet.',
-            'content'=>'Lorem ipsum <strong>dolor</strong> sit amet consectetur adipisicing elit. Amet, fugit?',
-        ];
-        $posts=array_fill(0,10, $post);
+        $post=DB::select('select * from posts where id = ?', [$post]);
+        $post = json_decode(json_encode($post), true);
+        $post=$post['0'];
+        //dd($post);
+
+        //$post=['id'=>1012, 'title'=>'тест', 'content'=>'нет'];
+
+       //dd($post);
+       //dd($post2);
+
+            //dd($post);
+     
        return view('blog.show', compact('post'));
         
     }

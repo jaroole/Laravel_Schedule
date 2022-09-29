@@ -10,7 +10,7 @@ class PostController extends Controller
 {
     public function index(){
 
-        $posts=DB::select('select * from posts where user_id = ?', [1003]);
+        $posts=DB::select('select * from posts where user_id = ?', [session()->get('userSessionId')]);
         return view('user.posts.index', compact('posts'));
     }
 
@@ -24,11 +24,11 @@ class PostController extends Controller
         
         $title=$request->input('title');
         $content=$request->input('content');
-        DB::insert('insert into posts (title, content, user_id) values (?, ?, ?)', [$title, $content, 1003]);
+        DB::insert('insert into posts (title, content, user_id) values (?, ?, ?)', [$title, $content, session()->get('userSessionId')]);
 
        
         alert(__('Сохранено'));
-       return redirect()->route('user.posts', 1003);
+       return redirect()->route('user.posts', session()->get('userSessionId'));
     }
 
 
@@ -37,7 +37,7 @@ class PostController extends Controller
     public function show($post){
         
 
-        $post=DB::select('select * from posts where id = ? AND user_id = ?', [$post, 1003]);
+        $post=DB::select('select * from posts where id = ? AND user_id = ?', [$post, session()->get('userSessionId')]);
         $post = json_decode(json_encode($post), true);
         $post=$post['0'];
 
@@ -85,7 +85,7 @@ class PostController extends Controller
    
         DB::update(
             'update posts set title = ? , content = ? where user_id = ? AND id = ?',
-            [$title, $content, 1003, $post]);
+            [$title, $content, session()->get('userSessionId'), $post]);
         
         
 
